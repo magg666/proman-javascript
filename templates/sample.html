@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/sample.css') }}">
+    <title>Title</title>
+</head>
+<body>
+
+<h2>BOARD</h2>
+
+<div class="board-container container">
+    <div class="row">
+        <div class="delete-button-container col-1">
+            <button>DELETE</button>
+        </div>
+        <div class="archive-or-restore-board-button-container col-2">
+            <button>ARCHIVE/RESTORE</button>
+        </div>
+        <div class="title col-7">
+            <h3>BOARD TITLE</h3>
+        </div>
+        <div class="carousel-button-container col-2">
+            <button type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
+                    aria-controls="collapseExample">ROZWIŃ
+            </button>
+        </div>
+    </div>
+
+    <div class="collapse" id="collapseExample">
+        <div class="row">
+            <div class="add-new-card-button-container col-6">
+                <button>ADD NEW CARD</button>
+            </div>
+            <div class="make-board-private-or-public-button-container col-6">
+                <button>SHARE/UNSHARE</button>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="status col-3">NEW</div>
+            <div class="status col-3">IN PROGRESS</div>
+            <div class="status col-3">TESTING</div>
+            <div class="status col-3">DONE</div>
+
+        </div>
+        <div class="row">
+            <div class="for-cards col-3"></div>
+            <div class="for-cards col-3"></div>
+            <div class="for-cards col-3"></div>
+            <div class="for-cards col-3"></div>
+        </div>
+    </div>
+</div>
+
+<h2>MODAL FOR NEW BOARD</h2>
+
+
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal3">
+  ADD NEW BOARD
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModal3Label" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModal3Label">CREATE NEW BOARD</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form role="form" id="board-form">
+            <p><input class="name-of-board" type="text" placeholder="NAME OF BOARD"></p>
+            <label>PUBLIC OR PRIVATE
+                <select>
+                    <option>PUBLIC</option>
+                    <option>PRIVATE</option>
+                </select>
+
+            </label>
+            <p><button type="submit" class="btn btn-info">CREATE!</button></p></form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">ALBO NIE CREATE...</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2>MODAL FOR NEW CARD</h2>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal2">
+  ADD NEW CARD
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModal2Label" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModal2Label">CREATE NEW CARD</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form role="form" id="board-form">
+
+            <p><input class="name-of-board" type="text" placeholder="NAME OF CARD"></p>
+            <p><button type="submit" class="btn btn-info">CREATE!</button></p>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">ALBO NIE CREATE...</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2>CARD</h2>
+
+<div class="card">
+  <div class="card-body">
+
+    <h4 class="card-title">CARD NAME</h4>
+      <div class="card-subtitle">
+      <button class="rename">RENAME</button>
+      <button class="delete-card">X</button>
+      </div>
+    <p class="card-text">
+      VERY IMPORTANT TASK
+    </p>
+
+  </div>
+</div>
+
+
+</body>
+</html>

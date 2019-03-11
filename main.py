@@ -3,11 +3,16 @@ from flask import Flask, render_template
 app = Flask(__name__)
 
 
+# @app.route("/")
+# def boards():
+#     ''' this is a one-pager which shows all the boards and cards '''
+#     return render_template('boards.html')
+
+
 @app.route("/")
 def boards():
     ''' this is a one-pager which shows all the boards and cards '''
-    return render_template('boards.html')
-
+    return render_template('sample.html')
 
 def main():
     app.run(debug=True)
