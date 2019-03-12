@@ -1,5 +1,6 @@
 body{
     padding: 20px;
+    background-color: gray;
 }
 
 .container, .row, .status{
@@ -27,4 +28,56 @@ textarea {
 h4{
     min-height: 30px;
     border: black 1px dotted;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    margin: 10% auto;
+    width: 60%;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
+    animation-name: modalopen;
+    animation-duration: var(--modal-duration);
+}
+
+.modal-header {
+    background: #ffdd80;
+    padding: 15px;
+    color: #fff;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    text-align: center;
+    display: block;
+    color: green;
+}
+
+#newBoardHeader {
+    font-size: 28px;
+}
+
+.close-btn {
+    color: #fff;
+    float: right;
+    font-size: 30px;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-body {
+    text-align: center;
 }
