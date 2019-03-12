@@ -1,3 +1,30 @@
-#boards {
-    background-color: green;
+body{
+    padding: 20px;
+}
+
+.container, .row, .status{
+    border: black 1px solid;
+}
+.for-cards  {
+    min-height: 400px;
+    height: fit-content;
+    border: black 1px dotted;
+}
+h2{
+    text-align: center;
+    padding: 20px;
+    color: red;
+}
+.card {
+    width: 300px;
+    border: black 1px solid;
+
+}
+textarea {
+    border: none;
+    resize: none;
+}
+h4{
+    min-height: 30px;
+    border: black 1px dotted;
 }

@@ -1,11 +1,22 @@
+import {dataHandler} from "./data_handler.js";
+import {createCard} from "./create_dom.js";
+export {dom}
+
 // It uses data_handler.js to visualize elements
 let dom = {
     loadBoards: function () {
         // retrieves boards and makes showBoards called
+        dataHandler.getBoards(this.showBoards);
     },
     showBoards: function (boards) {
         // shows boards appending them to #boards div
         // it adds necessary event listeners also
+
+        let boardsDiv = document.querySelector('#boards');
+
+        for(let board of boards) {
+            createCard();
+        }
     },
     loadCards: function (boardId) {
         // retrieves cards and makes showCards called
