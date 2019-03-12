@@ -1,22 +1,9 @@
 export {createCard}
-
-
-let createButton = ()=> {
-  document.createElement('button');
-};
-
-let createDiv = () => {
-  document.createElement('div');
-};
-
-let addClass = (target, className) => {
-  target.classList.add(className);
-};
-
+import {makeTextEditableOnClick} from "./cards.js";
 
 function createCard() {
-    const card = createDiv();
-    addClass(card, 'card');
+    const card = document.createElement('div');
+    card.classList.add('card');
 
     const cardBody = document.createElement('div');
     cardBody.classList.add('card-body');
@@ -25,8 +12,7 @@ function createCard() {
     cardTitle.classList.add('card-title');
     cardTitle.addEventListener('mouseout', function () {
                      cardTitle.contentEditable = 'false';
-                     let text = JSON.parse(window.localStorage.getItem('proman-data'));
-                     cardTitle.textContent = text.cards[0].title;
+
                  });
     cardTitle.addEventListener('click', function () {
                      cardTitle.contentEditable = 'true'
@@ -37,7 +23,7 @@ function createCard() {
     cardSubtitle.classList.add('card-subtitle');
 
 
-    const cardButtonDelete = createButton();
+    const cardButtonDelete = document.createElement('button');
     cardButtonDelete.classList.add('card-delete');
     cardButtonDelete.setAttribute('title', 'Delete Card');
     cardButtonDelete.insertAdjacentHTML('afterbegin', '<i class="far fa-trash-alt"></i>');
