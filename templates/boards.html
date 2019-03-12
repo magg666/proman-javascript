@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>ProMan</title>
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
@@ -14,10 +15,58 @@
     <script src="{{ url_for('static', filename='js/dom.js') }}" defer type="module"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}" defer type="module"></script>
     <script src="{{ url_for('static', filename='js/create_dom.js') }}" defer type="module"></script>
+    <script src="{{ url_for('static', filename='js/modal.js') }}" defer type="module"></script>
 </head>
 <body>
 <h1>ProMan</h1>
 <div id="boards">Boards are loading...</div>
+<button id="register-button"></button>
+<!-- Modal -->
+<div id="registration" class="popup">
+    <div class="popup-content">
+        <div class="popup-header">
+            <h3 id="popup-header">Registration form</h3>
+            <span class="close">&times;</span>
+        </div>
+        <hr>
+        <div class="popup-body">
+            <form class="form-inline" action="/registration" method="POST">
+                <div class="form-group row">
+                    <label for="username" class="col-sm-2 col-form-label">Username</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="username" id="username" placeholder="Username"
+                               required autofocus>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="password1" class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" name="password1" id="password1"
+                               placeholder="Password" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="password2" class="col-sm-2 col-form-label">Repeat password</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" name="password2" id="password2"
+                               placeholder="Repeat password" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-10">
+                        <button type="submit" class="btn btn-outline-secondary">Register</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <hr>
+        <div class="popup-footer">
+            <p>
+                <button class="btn btn-outline-secondary close">Close</button>
+            </p>
+        </div>
+    </div>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -30,3 +79,4 @@
         crossorigin="anonymous"></script>
 </body>
 </html>
+
