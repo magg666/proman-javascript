@@ -42,6 +42,10 @@ h4{
     overflow: auto;
 }
 
+.popup-body .row{
+    border: none;
+}
+
 .close {
     color: #ffffff;
     font-size: 18px;
@@ -97,3 +101,4 @@ h4{
         opacity: 1;
     }
 }
+
