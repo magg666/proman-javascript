@@ -19,7 +19,7 @@ let dom = {
         let fakeDiv = document.createElement('div');
         fakeDiv.innerHTML = textToAppend.trim();
 
-        for (childNode of fakeDiv.childNodes) {
+        for (let childNode of fakeDiv.childNodes) {
             if (prepend) {
                 elementToExtend.prependChild(childNode);
             } else {
