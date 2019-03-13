@@ -31,12 +31,10 @@ let dom = {
 
         for(let j = 0; j < boards.length; j++){
             realBoardId = boards[j].id;
-            alert(j);
 
             let boardId = 'board' + boards[j].id;
-            alert(boards[j].id);
+
             let allBoards = document.querySelectorAll('.board-container');
-            alert(boardId);
 
             allBoards[j].setAttribute('id', boardId);
 
