@@ -1,119 +1,113 @@
-export {createCard, createBoard}
-
-
-// let createButton = () => {
-//   document.createElement('button');
-// };
-//
-// let createDiv = () => {
-//   document.createElement('div');
-// };
-//
-// let addClass = (target, className) => {
-//   target.classList.add(className);
-// };
+export {createBoard, determineColumnsHeaders, changeLabelOfCollapseButton, determineCardContainersClass}
 
 
 function createCard() {
-  const card = createDiv();
-  addClass(card, 'card');
+    const card = document.createElement('div');
+    card.classList.add('card');
 
-  const cardBody = document.createElement('div');
-  cardBody.classList.add('card-body');
+    const cardBody = document.createElement('div');
+    cardBody.classList.add('card-body');
 
-  const cardTitle = document.createElement('h4');
-  cardTitle.classList.add('card-title');
-  cardTitle.addEventListener('mouseout', function () {
-    cardTitle.contentEditable = 'false';
-    let text = JSON.parse(window.localStorage.getItem('proman-data'));
-    cardTitle.textContent = text.cards[0].title;
-  });
-  cardTitle.addEventListener('click', function () {
-    cardTitle.contentEditable = 'true'
-  });
+    const cardTitle = document.createElement('h4');
+    cardTitle.classList.add('card-title');
+    cardTitle.addEventListener('mouseout', function () {
+                     cardTitle.contentEditable = 'false';
 
-
-  const cardSubtitle = document.createElement('div');
-  cardSubtitle.classList.add('card-subtitle');
+                 });
+    cardTitle.addEventListener('click', function () {
+                     cardTitle.contentEditable = 'true'
+                 });
 
 
-  const cardButtonDelete = createButton();
-  cardButtonDelete.classList.add('card-delete');
-  cardButtonDelete.setAttribute('title', 'Delete Card');
-  cardButtonDelete.insertAdjacentHTML('afterbegin', '<i class="far fa-trash-alt"></i>');
-
-  const cardText = document.createElement('textarea');
-  cardText.classList.add('card-text');
-  cardText.addEventListener('mouseout', function () {
-    cardText.contentEditable = 'false';
-  });
-  cardText.addEventListener('dblclick', function () {
-    cardText.contentEditable = 'true';
-  });
+    const cardSubtitle = document.createElement('div');
+    cardSubtitle.classList.add('card-subtitle');
 
 
-  cardSubtitle.appendChild(cardButtonDelete);
+    const cardButtonDelete = document.createElement('button');
+    cardButtonDelete.classList.add('card-delete');
+    cardButtonDelete.setAttribute('title', 'Delete Card');
+    cardButtonDelete.insertAdjacentHTML('afterbegin', '<i class="far fa-trash-alt"></i>');
 
-  cardBody.appendChild(cardTitle);
-  cardBody.appendChild(cardSubtitle);
-  cardBody.appendChild(cardText);
+    const cardText = document.createElement('textarea');
+    cardText.classList.add('card-text');
+    cardText.addEventListener('mouseout', function () {
+                    cardText.contentEditable = 'false';
+                });
+    cardText.addEventListener('dblclick', function () {
+                    cardText.contentEditable = 'true';
+                });
 
-  card.appendChild(cardBody);
-  const cardContainer = document.getElementById('boards');
-  cardContainer.appendChild(card);
+
+    cardSubtitle.appendChild(cardButtonDelete);
+
+    cardBody.appendChild(cardTitle);
+    cardBody.appendChild(cardSubtitle);
+    cardBody.appendChild(cardText);
+
+    card.appendChild(cardBody);
+    const cardContainer = document.getElementById('boards');
+    cardContainer.appendChild(card);
 }
 
-function createBoard() {
-  const boardsContainer = document.querySelector('#boards');
+function createBoard(boardsContainer, columnHeaders, columnClasses) {
+  // const boardsContainer = document.querySelector('#boards');
 
   const board = document.createElement('div');
   board.setAttribute('class', 'board-container container');
+
   const rowDiv = document.createElement('div');
   rowDiv.setAttribute('class', 'row');
 
   const deleteButtonContainer = document.createElement('div');
   deleteButtonContainer.setAttribute('class','delete-button-container col-2');
-  const deleteButton = document.createElement('button');
 
+  const deleteButton = document.createElement('button');
   deleteButton.appendChild(document.createTextNode('DELETE'));
 
   const archiveOrRestoreButtonContainer = document.createElement('div');
   archiveOrRestoreButtonContainer.setAttribute('class', 'archive-or-restore-board-button-container col-2');
-  const archiveOrRestoreButton = document.createElement('button');
 
+  const archiveOrRestoreButton = document.createElement('button');
   archiveOrRestoreButton.appendChild(document.createTextNode('ARCHIVE'));
 
   const boardTitleDiv = document.createElement('div');
   boardTitleDiv.setAttribute('class', 'title col-6 text-center');
+
   const titleHeader = document.createElement('h3');
   titleHeader.appendChild(document.createTextNode('BOARD TITLE'));
   boardTitleDiv.appendChild(titleHeader);
 
   const rolledButtonContainer = document.createElement('div');
   rolledButtonContainer.setAttribute('class', 'carousel-button-container col-2');
+
   const rolledButton = document.createElement('button');
+  rolledButton.classList.add('board-collapse-button');
   rolledButton.setAttribute('type', 'button');
   rolledButton.setAttribute('data-toggle','collapse');
-  rolledButton.setAttribute('data-target','#collapseExample');
+  // rolledButton.setAttribute('data-target','#collapseExample');
   rolledButton.setAttribute('aria-expanded', 'false');
-  rolledButton.setAttribute('aria-controls','collapseExample');
+  // rolledButton.setAttribute('aria-controls','collapseExample');
   rolledButton.appendChild(document.createTextNode('SHOW'));
   rolledButtonContainer.appendChild(rolledButton);
 
-  const unrolledButtonContainer = document.createElement('div');
-  unrolledButtonContainer.setAttribute('id','collapseExample');
-  unrolledButtonContainer.setAttribute('class','collapse');
+  const boardCollapseContainer = document.createElement('div');
+  // boardCollapseContainer.setAttribute('id','collapseExample');
+  boardCollapseContainer.classList.add('collapse', 'board-collapse-container');
+
   const rowInButtonContainer = document.createElement('div');
   rowInButtonContainer.setAttribute('class', 'row');
 
   const newCardButtonContainer = document.createElement('div');
   newCardButtonContainer.setAttribute('class','add-new-card-button-container col-6');
+
   const newCardButton = document.createElement('button');
+  newCardButton.classList.add('new-card-button');
   newCardButton.appendChild(document.createTextNode('ADD NEW CARD'));
   newCardButtonContainer.appendChild(newCardButton);
 
   const shareButtonContainer = document.createElement('div');
   shareButtonContainer.setAttribute('class','make-board-private-or-public-button-container col-6');
+
   const shareButton = document.createElement('button');
   shareButton.appendChild(document.createTextNode('SHARE/UNSHARE'));
   shareButtonContainer.appendChild(shareButton);
@@ -121,27 +115,32 @@ function createBoard() {
   const rowWithColumnHeaders = document.createElement('div');
   rowWithColumnHeaders.setAttribute('class','row');
 
-  let columnHeaders = ['NEW','IN PROGRESS','TESTING','DONE'];
-  for(let i=0; i<4; i++) {
+  // let columnHeaders = ['NEW','IN PROGRESS','TESTING','DONE'];
+
+
+  for(let i=0; i<columnHeaders.length; i++) {
     let columnDiv = document.createElement('div');
     columnDiv.setAttribute('class','status col-3');
     columnDiv.appendChild(document.createTextNode(columnHeaders[i]));
     rowWithColumnHeaders.appendChild(columnDiv);
   }
 
+
   const rowWithCardDivs = document.createElement('div');
   rowWithCardDivs.setAttribute('class','row');
-  for(let i=0; i<4; i++) {
+
+  for(let i=0; i<columnHeaders.length; i++) {
     let cardDiv = document.createElement('div');
     cardDiv.setAttribute('class','for-cards col-3');
+    cardDiv.classList.add(columnClasses[i]);
     rowWithCardDivs.appendChild(cardDiv);
   }
 
   rowInButtonContainer.appendChild(newCardButtonContainer);
   rowInButtonContainer.appendChild(shareButtonContainer);
-  unrolledButtonContainer.appendChild(rowInButtonContainer);
-  unrolledButtonContainer.appendChild(rowWithColumnHeaders);
-  unrolledButtonContainer.appendChild(rowWithCardDivs);
+  boardCollapseContainer.appendChild(rowInButtonContainer);
+  boardCollapseContainer.appendChild(rowWithColumnHeaders);
+  boardCollapseContainer.appendChild(rowWithCardDivs);
 
   archiveOrRestoreButtonContainer.appendChild(archiveOrRestoreButton);
   deleteButtonContainer.appendChild(deleteButton);
@@ -151,7 +150,7 @@ function createBoard() {
   rowDiv.appendChild(rolledButtonContainer);
   board.appendChild(rowDiv);
 
-  board.appendChild(unrolledButtonContainer);
+  board.appendChild(boardCollapseContainer);
   boardsContainer.appendChild(board);
 
 //  const boardsContainer = document.querySelector('#boards');
@@ -204,4 +203,45 @@ function createBoard() {
 //  `;
 //
 //  boardsContainer.insertAdjacentHTML('beforeend', boardString);
+}
+
+function determineColumnsHeaders(statuses) {
+    let columnsHeaders = [];
+    for(let status of statuses){
+        columnsHeaders.push(status.name)
+    }return columnsHeaders
+}
+
+function determineCardContainersClass(statuses) {
+    let columnsClasses = [];
+    for(let status of statuses){
+        columnsClasses.push('card-container' + status.id)
+    }return columnsClasses
+}
+
+
+function changeLabelOfCollapseButton(collapseButton) {
+    setTimeout(function () {
+        collapseButton.classList.contains('collapsed') ? collapseButton.textContent = 'SHOW' : collapseButton.textContent = 'HIDE'
+    }, 200)
+}
+
+
+
+function dropCopy(ev) {
+    ev.preventDefault();
+    let data = ev.dataTransfer.getData("Text");
+    let copySymbol = document.createElement("span");
+    let original = document.getElementById(data);
+    copySymbol.textContent = original.textContent;
+    copySymbol.classList = original.classList;
+    ev.target.appendChild(copySymbol);
+    return copySymbol.textContent
+}
+
+function dropOnlyOnEmpty(ev, cellId) {
+    let content = document.getElementById(cellId);
+    if (content.innerText.trim() === '') {
+    return dropCopy(ev)
+    }
 }

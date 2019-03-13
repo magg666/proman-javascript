@@ -6,7 +6,7 @@ body{
     border: black 1px solid;
 }
 .for-cards  {
-    min-height: 150px;
+    min-height: 300px;
     height: fit-content;
     border: black 1px dotted;
 }
@@ -16,13 +16,14 @@ h2{
     color: red;
 }
 .card {
-    width: 300px;
+    width: 200px;
     border: black 1px solid;
 
 }
 textarea {
     border: none;
     resize: none;
+    width: 180px;
 }
 h4{
     min-height: 30px;
