@@ -29,11 +29,14 @@ let dom = {
         let newCardButtons = document.querySelectorAll('.new-card-button');
         // let newCardContainers = document.querySelectorAll('.card-container-1');
 
-        for(let j = 1; j < boards.length; j++){
+        for(let j = 0; j < boards.length; j++){
             realBoardId = boards[j].id;
+            alert(j);
 
             let boardId = 'board' + boards[j].id;
+            alert(boards[j].id);
             let allBoards = document.querySelectorAll('.board-container');
+            alert(boardId);
 
             allBoards[j].setAttribute('id', boardId);
 
