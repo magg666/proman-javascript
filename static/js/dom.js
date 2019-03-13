@@ -1,7 +1,7 @@
 import {dataHandler} from "./data_handler.js";
 import {createCard} from "./cards.js";
 import {makeTextEditableOnClick, makeTextReturnToDefaultOnMouseOut} from "./cards.js";
-import {createBoard, determineColumnsHeaders, changeLabelOfCollapseButton, determineCardContainersClass, addListenersToElementsTable} from "./create_dom.js";
+import {createBoard, determineColumnsHeaders, determineCardContainersClass, addListenersToElementsTable} from "./create_dom.js";
 
 
 export {dom}
@@ -29,48 +29,6 @@ let dom = {
         }
 
         let newCardButtons = document.querySelectorAll('.new-card-button');
-        // let newCardContainers = document.querySelectorAll('.card-container-1');
-
-        // for(let j = 0; j < boards.length; j++){
-        //     realBoardId = boards[j].id;
-        //
-        //     let boardId = 'board' + boards[j].id;
-        //
-        //     let allBoards = document.querySelectorAll('.board-container');
-        //
-        //     allBoards[j].setAttribute('id', boardId);
-        //
-        //     let boardCollapseContainers = document.querySelectorAll('.board-collapse-container');
-        //     let collapseId = 'collapse' + boards[j].id;
-        //     boardCollapseContainers[j].setAttribute('id', collapseId);
-        //
-        //     let rolledButtons = document.querySelectorAll('.board-collapse-button');
-        //     rolledButtons[j].setAttribute('data-target', '#' + collapseId);
-        //     rolledButtons[j].setAttribute('aria-controls', collapseId);
-        //     rolledButtons[j].addEventListener('click', function () {
-        //         changeLabelOfCollapseButton(rolledButtons[j])
-        //     });
-        //     newCardButtons[j].addEventListener('click', function () {
-        //         // createCard(boardId)
-        //
-        //     })
-        //
-        //
-        // }
-        // let cardContainers = document.querySelectorAll('.for-cards');
-        // for(let k = 0; k< cardContainers.length; k++){
-        //     let cardContainerId = 'card-container' + k;
-        //     cardContainers[k].setAttribute('id', cardContainerId);
-        //     cardContainers[k].addEventListener('dragover', function () {
-        //         allowDrop(event)
-        //     });
-        //     cardContainers[k].addEventListener('drop', function () {
-        //         drop(event)
-        //     });
-        // }dom.loadCards(realBoardId)
-
-
-
 
     },
     loadCards: function (boardId) {
