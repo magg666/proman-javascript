@@ -1,4 +1,10 @@
-export {createBoard, determineColumnsHeaders, changeLabelOfCollapseButton, determineCardContainersClass, addListenersToElementsTable}
+export {
+    createBoard,
+    determineColumnsHeaders,
+    changeLabelOfCollapseButton,
+    determineCardContainersClass,
+    addListenersToElementsTable
+}
 
 
 function createCard() {
@@ -65,7 +71,7 @@ function createBoard(board) {
     <div class="title col-6 text-center">
     <h3>BOARD TITLE</h3></div>        
     <div class="carousel-button-container col-2">
-    <button class="board-collapse-button" type="button" data-toggle="collapse" aria-expanded="true" data-target="#collapse${board.id}" aria-controls="collapse${board.id}">HIDE</button></div>    
+    <button class="board-collapse-button" id="btn${board.id}" type="button" data-toggle="collapse" aria-expanded="true" data-target="#collapse${board.id}" aria-controls="collapse${board.id}">HIDE</button></div>    
     </div>`;
     boardTable.insertAdjacentHTML('beforeend', rowBoardTitle);
 
@@ -95,20 +101,34 @@ function createBoard(board) {
     let boardTitle = boardTable.querySelector('h3');
     boardTitle.textContent = board.title;
     boardsContainer.appendChild(boardTable);
-        
+
 }
 
 function addListenersToElementsTable(board) {
     let boardId = board.id;
     let boardTable = document.getElementById(boardId);
-    let deleteButton = document.getElementById('btn-delete'+board.id);
+    let deleteButton = document.getElementById('btn-delete' + board.id);
+
     deleteButton.addEventListener('click', function () {
         console.log(deleteButton);
+    });
+
+    let collapseButton = document.getElementById("btn" + board.id);
+    collapseButton.addEventListener('click', function () {
+        let collapseContent = document.getElementById("collapse" + board.id);
+        setTimeout(function () {
+            collapseButton.classList.contains('collapsed') ? collapseButton.textContent = 'HIDE' : collapseButton.textContent = 'SHOW'
+        }, 200)
     });
 
 
 }
 
+function changeLabelOfCollapseButton(collapseButton) {
+
+    collapseButton.classList.contains('collapsed') ? collapseButton.textContent = 'SHOW' : collapseButton.textContent = 'HIDE'
+
+}
 
 // function createBoard(boardsContainer, columnHeaders, columnClasses) {
 //     // const boardsContainer = document.querySelector('#boards');
@@ -280,13 +300,6 @@ function determineCardContainersClass(statuses) {
         columnsClasses.push('card-container' + status.id)
     }
     return columnsClasses
-}
-
-
-function changeLabelOfCollapseButton(collapseButton) {
-    setTimeout(function () {
-        collapseButton.classList.contains('collapsed') ? collapseButton.textContent = 'SHOW' : collapseButton.textContent = 'HIDE'
-    }, 200)
 }
 
 
