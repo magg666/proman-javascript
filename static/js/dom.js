@@ -17,6 +17,7 @@ let dom = {
         // it adds necessary event listeners also
         let columnsHeaders = dataHandler.getStatuses(determineColumnsHeaders);
         let columnsClasses = dataHandler.getStatuses(determineCardContainersClass);
+        let realBoardId;
 
 
 
@@ -26,9 +27,10 @@ let dom = {
         }
 
         let newCardButtons = document.querySelectorAll('.new-card-button');
-        let newCardContainers = document.querySelectorAll('.card-container-1');
+        // let newCardContainers = document.querySelectorAll('.card-container-1');
 
-        for(let j = 0; j < boards.length; j++){
+        for(let j = 1; j < boards.length; j++){
+            realBoardId = boards[j].id;
 
             let boardId = 'board' + boards[j].id;
             let allBoards = document.querySelectorAll('.board-container');
@@ -45,9 +47,10 @@ let dom = {
             rolledButtons[j].addEventListener('click', function () {
                 changeLabelOfCollapseButton(rolledButtons[j])
             });
-            newCardButtons[j].addEventListener('click', function () {
-                createCard(boardId)
-            })
+            // newCardButtons[j].addEventListener('click', function () {
+            //     // createCard(boardId)
+            //
+            // })
 
 
         }
@@ -61,7 +64,7 @@ let dom = {
             cardContainers[k].addEventListener('drop', function () {
                 drop(event)
             });
-        }
+        }dom.loadCards(realBoardId)
 
 
 

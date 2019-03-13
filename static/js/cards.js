@@ -25,6 +25,7 @@ function makeTextReturnToDefaultOnMouseOut(element, saveButtonId) {
     element.addEventListener('mouseout', function () {
         if(element.isContentEditable){
             let button = document.getElementById(saveButtonId);
+            element.contentEditable = 'false';
             button.remove()
         }
     })
