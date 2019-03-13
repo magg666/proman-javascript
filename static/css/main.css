@@ -1,31 +1,35 @@
-body{
+body {
     padding: 20px;
     background-color: gray;
 }
 
-.container, .row, .status{
+.container, .row, .status {
     border: black 1px solid;
 }
-.for-cards  {
+
+.for-cards {
     min-height: 400px;
     height: fit-content;
     border: black 1px dotted;
 }
-h2{
+
+h2 {
     text-align: center;
     padding: 20px;
     color: red;
 }
+
 .card {
     width: 300px;
     border: black 1px solid;
-
 }
+
 textarea {
     border: none;
     resize: none;
 }
-h4{
+
+h4 {
     min-height: 30px;
     border: black 1px dotted;
 }
@@ -47,7 +51,6 @@ h4{
     width: 60%;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
     animation-name: modalopen;
-    animation-duration: var(--modal-duration);
 }
 
 .modal-header {
