@@ -1,4 +1,4 @@
-export {makeTextEditableOnClick, makeTextReturnToDefaultOnMouseOut}
+export {makeTextEditableOnClick, makeTextReturnToDefaultOnMouseOut, createCard}
 
 function makeSaveButton(element, saveButtonId){
     let saveButton = document.createElement('button');
@@ -33,8 +33,17 @@ function makeTextReturnToDefaultOnMouseOut(element, saveButtonId) {
 function createCard(boardId) {
     const card = document.createElement('div');
     card.classList.add('card');
+    card.setAttribute('draggable', 'true');
+    // card.setAttribute('ondragstart', 'drag(event)');
+    card.addEventListener('dragstart', function () {
+        drag(event)
+    });
+    card.setAttribute('id', 'card1');
 
     const cardBody = document.createElement('div');
+
+
+
     cardBody.classList.add('card-body');
 
     const cardTitle = document.createElement('h4');
@@ -58,12 +67,10 @@ function createCard(boardId) {
     cardBody.appendChild(cardText);
 
     card.appendChild(cardBody);
-    const cardContainer = document.getElementById(boardId);
+    const board = document.getElementById(boardId);
+    let cardContainer = board.querySelector('.card-container1');
     cardContainer.appendChild(card);
 }
-
-
-
-function showCards(cards) {
-
+function drag(ev) {
+    ev.dataTransfer.setData("text/plain", ev.target.id);
 }
