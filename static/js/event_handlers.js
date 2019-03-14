@@ -7,6 +7,7 @@ function makeSaveButton(element, saveButtonId) {
     saveButton.addEventListener('click', function () {
         element.contentEditable = 'false';
         saveButton.remove()
+
     })
 }
 
