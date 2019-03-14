@@ -75,6 +75,10 @@ function drop(receivingElement) {
 		card.setAttribute('data-board-id', receivingElement.dataset.boardId);
 		card.setAttribute('data-status-id', receivingElement.dataset.statusId);
 
+		// data.status_id = card.dataset.statusId;
+		// data.board_id = card.dataset.boardId;
+
+
 	})
 }
 
