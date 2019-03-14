@@ -1,41 +1,59 @@
-function makeSaveButton(element, saveButtonId) {
+export {drag, editableOnClick, deleteDataOnClick}
+import {dataHandler} from "./data_handler.js";
+
+
+// drag function
+function drag(element){
+    element.addEventListener('dragstart', function (ev) {
+        ev.dataTransfer.setData("text/plain", ev.target.id);
+    });
+}
+
+// text rename handler
+function editableOnClick(element, data) {
+    element.addEventListener('dblclick', function () {
+        if(!element.isContentEditable){
+            element.contentEditable = 'true';
+            updateText(element, data)
+        }
+    })
+}
+
+function updateText(element, data){
     let saveButton = document.createElement('button');
-    saveButton.classList.add('save-button', 'btn', 'btn-info');
-    saveButton.setAttribute('id', saveButtonId);
+    saveButton.classList.add('save-button','float-right', 'btn', 'btn-sm', 'btn-success');
+    saveButton.setAttribute('title', 'SAVE TEXT or ESC TO CANCEL');
     saveButton.insertAdjacentHTML('afterbegin', '<i class="far fa-save"></i>');
-    element.insertAdjacentElement('afterend', saveButton);
+
     saveButton.addEventListener('click', function () {
         element.contentEditable = 'false';
-        saveButton.remove()
+        saveButton.remove();
+        data.title = element.textContent;
+        dataHandler.synchronise()
+    });
 
-    })
+    element.parentElement.parentElement.appendChild(saveButton);
 }
+//------------------------
 
-function makeTextEditableOnClick(element, saveButtonId) {
+// delete handler
+
+function deleteDataOnClick(element, dataId, data) {
     element.addEventListener('click', function () {
-        element.contentEditable = 'true';
-        if (element.nextSibling === null) {
-            makeSaveButton(element, saveButtonId)
-        }
+        let confirmation = confirm("Do you really want delete card?\nIt's irreversible...");
+        confirmation === true ? deleteDataAndSave(dataId, data): null;
     })
 }
 
-function makeTextReturnToDefaultOnMouseOut(element, saveButtonId) {
-    element.addEventListener('mouseout', function () {
-        if (element.isContentEditable) {
-            let button = document.getElementById(saveButtonId);
-            element.contentEditable = 'false';
-            button.remove()
-        }
-    })
+function deleteDataAndSave(dataId, data) {
+    let dataToDelete = document.getElementById(dataId);
+    let id = parseInt(dataToDelete.dataset.cardId, 10);
+    dataToDelete.remove();
+    dataHandler.deleteData(data, id);
+    dataHandler.synchronise()
 }
 
 
-function changeLabelOfCollapseButton(collapseButton) {
-    setTimeout(function () {
-        collapseButton.classList.contains('collapsed') ? collapseButton.textContent = 'SHOW' : collapseButton.textContent = 'HIDE'
-    }, 200)
-}
 
 // make one card/board
 // for one card/board add event handlery
@@ -58,28 +76,29 @@ function changeLabelOfCollapseButton(collapseButton) {
 
 
 
-let deleteButton;
-deleteOnClick(deleteButton, boards)
 
-
-
-
-
-function deleteOnClick(deleteButton, boards) {
-
-    deleteButton.addEventListener('click', function () {
-        deleteElement(button, boards);
-
-    })
-
-}
-function deleteElement(button, boards) {
-    let boardId = button.dataset.boardId;
-    let element = document.getElementById(boardId);
-    element.remove();
-    for (let board of boards)
-        if (board.id === boardId) {
-            delete board
-        }
-
-}
+// let deleteButton;
+// deleteOnClick(deleteButton, boards)
+//
+//
+//
+//
+//
+// function deleteOnClick(deleteButton, boards) {
+//
+//     deleteButton.addEventListener('click', function () {
+//         deleteElement(button, boards);
+//
+//     })
+//
+// }
+// function deleteElement(button, boards) {
+//     let boardId = button.dataset.boardId;
+//     let element = document.getElementById(boardId);
+//     element.remove();
+//     for (let board of boards)
+//         if (board.id === boardId) {
+//             delete board
+//         }
+//
+// }

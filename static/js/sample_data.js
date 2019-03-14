@@ -59,7 +59,7 @@ let sampleData = {
         {
             "id": 3,
             "title": "task4",
-            "board_id": 2,
+            "board_id": 1,
             "status_id": 0,
             "order": 2
         },

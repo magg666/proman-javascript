@@ -1,6 +1,5 @@
-import {dataHandler} from "./data_handler.js";
-
 export {createCard, fillCard, setDataAttributes}
+import {drag, deleteDataOnClick, editableOnClick} from "./event_handlers.js";
 
 function createCard(boardProperColumn, card_data) {
 
@@ -52,56 +51,4 @@ function setDataAttributes(item, card_data){
         item.setAttribute(attr, value)
     }
 }
-
-// drag function
-function drag(element){
-    element.addEventListener('dragstart', function (ev) {
-        ev.dataTransfer.setData("text/plain", ev.target.id);
-    });
-}
-
-// text rename handler
-function editableOnClick(element, data) {
-    element.addEventListener('dblclick', function () {
-        if(!element.isContentEditable){
-            element.contentEditable = 'true';
-            updateText(element, data)
-        }
-    })
-}
-
-function updateText(element, data){
-    let saveButton = document.createElement('button');
-    saveButton.classList.add('save-button','float-right', 'btn', 'btn-sm', 'btn-success');
-    saveButton.setAttribute('title', 'SAVE TEXT or ESC TO CANCEL');
-    saveButton.insertAdjacentHTML('afterbegin', '<i class="far fa-save"></i>');
-
-    saveButton.addEventListener('click', function () {
-        element.contentEditable = 'false';
-        saveButton.remove();
-        data.title = element.textContent;
-        dataHandler.synchronise()
-    });
-
-    element.parentElement.parentElement.appendChild(saveButton);
-}
-//------------------------
-
-// delete handler
-
-function deleteDataOnClick(element, dataId, data) {
-    element.addEventListener('click', function () {
-        let confirmation = confirm("Do you really want delete card?\nIt's irreversible...");
-        confirmation === true ? deleteDataAndSave(dataId, data): null;
-    })
-}
-
-function deleteDataAndSave(dataId, data) {
-    let dataToDelete = document.getElementById(dataId);
-    let id = parseInt(dataToDelete.dataset.cardId, 10);
-    dataToDelete.remove();
-    dataHandler.deleteData(data, id);
-    dataHandler.synchronise()
-}
-
 
