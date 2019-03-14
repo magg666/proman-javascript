@@ -1,6 +1,9 @@
 body{
     padding: 20px;
 }
+.container{
+    margin: 20px auto 20px auto;
+}
 
 .container, .row, .status{
     border: black 1px solid;
@@ -16,17 +19,18 @@ h2{
     color: red;
 }
 .card {
-    width: 200px;
+    width: 250px;
     border: black 1px solid;
+    background-color: #ecedff;
+
 
 }
-textarea {
-    border: none;
-    resize: none;
-    width: 180px;
-}
 h4{
-    min-height: 30px;
+    min-height: 60px;
     border: black 1px dotted;
+    border-radius: 8px;
+    font-size: 18px;
+    background-color: white;
+    padding: 3px;
 }
 

@@ -21,6 +21,13 @@ let dataHandler = {
     init: function () {
         this._loadData();
     },
+    synchronise: function () {
+        this._saveData()
+    },
+    deleteData: function (indicator, id) {
+        delete this._data[indicator][id]
+    },
+
     getBoards: function (callback) {
         // the boards are retrieved and then the callback function is called with the boards
 
@@ -42,14 +49,17 @@ let dataHandler = {
     getCardsByBoardId: function (boardId, callback) {
         let cards = this._data.cards;
         let cardsList = [];
-        for(let i = 0; i < cards.length; i++){
-            if(boardId === cards[i].board_id){
-                cardsList.push(cards[i]);
+
+        for (let i = 0; i < cards.length; i++) {
+            if (cards[i] !== null) {
+                if (boardId === cards[i].board_id) {
+                    cardsList.push(cards[i]);
+                }
+            }
 
 
         }
-
-        }return callback(cardsList)
+        return callback(cardsList)
         // the cards are retrieved and then the callback function is called with the cards
     },
     getCard: function (cardId, callback) {
