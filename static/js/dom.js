@@ -1,5 +1,5 @@
 import {dataHandler} from "./data_handler.js";
-import {createCard} from "./cards.js";
+import {createCard,fillCard, setDataAttributes} from "./cards.js";
 import {makeTextEditableOnClick, makeTextReturnToDefaultOnMouseOut} from "./cards.js";
 import {createBoard, determineColumnsHeaders, changeLabelOfCollapseButton, determineCardContainersClass} from "./create_dom.js";
 
@@ -38,6 +38,8 @@ let dom = {
 
             allBoards[j].setAttribute('id', boardId);
 
+            dom.loadCards(realBoardId);
+
             let boardCollapseContainers = document.querySelectorAll('.board-collapse-container');
             let collapseId = 'collapse' + boards[j].id;
             boardCollapseContainers[j].setAttribute('id', collapseId);
@@ -65,10 +67,7 @@ let dom = {
             cardContainers[k].addEventListener('drop', function () {
                 drop(event)
             });
-        }dom.loadCards(realBoardId)
-
-
-
+        }
 
     },
     loadCards: function (boardId) {
@@ -76,27 +75,57 @@ let dom = {
         dataHandler.getCardsByBoardId(boardId, this.showCards)
     },
     showCards: function (cards) {
+        for(let i=0; i< cards.length; i++){
+            let card = cards[i];
+            let boardId = card.board_id;
+            let statusId = card.status_id;
 
-        for(let i = 0; i< cards.length; i++){
-            let boardId = 'board' + i;
-            let cardId = 'card' + i;
-            createCard(boardId);
-            let card = document.querySelector('.card');
-            let cardTitle = document.querySelector('.card-title');
-            let cardButtonDelete = document.querySelector('.card-delete');
-            let cardText = document.querySelector('.card-text');
-            let cardSaveButtonId = 'card-save-button' + i;
+            let board = document.getElementById('board' + boardId);
+            let boardColumns = board.querySelectorAll('.for-cards');
+            let properColumn;
 
-            card.setAttribute('id', cardId);
-            cardTitle.textContent = cards[i].title;
-
-            makeTextEditableOnClick(cardText, cardSaveButtonId);
-            makeTextReturnToDefaultOnMouseOut(cardText, cardSaveButtonId);
-
+            switch (statusId) {
+                case 1:
+                    properColumn = boardColumns[1];
+                    break;
+                case 2:
+                    properColumn = boardColumns[2];
+                    break;
+                case 3:
+                    properColumn = boardColumns[3];
+                    break;
+                default:
+                    properColumn = boardColumns[0]
+            }
+            createCard(properColumn, card);
+            // cardParts.forEach(setDataAttributes)
+            // fillCard(card);
         }
-        // shows the cards of a board
-        // it adds necessary event listeners also
-    },
+
+
+
+    //
+    //     for(let i = 0; i< cards.length; i++){
+    //         let boardId = cards[i].board_id;
+    //         let cardId = 'card' + i;
+    //         if(boardId){
+    //         createCard(boardId);
+    //         let card = document.querySelector('.card');
+    //         let cardTitle = document.querySelector('.card-title');
+    //         let cardButtonDelete = document.querySelector('.card-delete');
+    //         let cardText = document.querySelector('.card-text');
+    //         let cardSaveButtonId = 'card-save-button' + i;
+    //
+    //         card.setAttribute('id', cardId);
+    //         cardTitle.textContent = cards[i].title;
+    //
+    //         makeTextEditableOnClick(cardText, cardSaveButtonId);
+    //         makeTextReturnToDefaultOnMouseOut(cardText, cardSaveButtonId);
+    //         }
+    //     }
+    //     // shows the cards of a board
+    //     // it adds necessary event listeners also
+     },
     appendToElement: function (elementToExtend, textToAppend, prepend = false) {
         // function to append new DOM elements (represented by a string) to an existing DOM element
         let fakeDiv = document.createElement('div');
