@@ -1,7 +1,6 @@
-import {dom} from "./dom.js";
 import {dataHandler} from "./data_handler.js";
 
-export {createCard, fillCard, makeTextReturnToDefaultOnMouseOut, makeTextEditableOnClick, changeLabelOfCollapseButton, setDataAttributes}
+export {createCard, fillCard, setDataAttributes}
 
 function createCard(boardProperColumn, card_data) {
 
@@ -37,8 +36,6 @@ function fillCard(card, card_data) {
 
     let cardArchiveButton = card.querySelector('card-archive-button');
 
-
-
     setDataAttributes(card, card_data);
     setDataAttributes(cardText, card_data);
     setDataAttributes(cardDeleteButton, card_data);
@@ -68,12 +65,12 @@ function editableOnClick(element, data) {
     element.addEventListener('dblclick', function () {
         if(!element.isContentEditable){
             element.contentEditable = 'true';
-            createButton(element, data)
+            updateText(element, data)
         }
     })
 }
 
-function createButton(element, data){
+function updateText(element, data){
     let saveButton = document.createElement('button');
     saveButton.classList.add('save-button','float-right', 'btn', 'btn-sm', 'btn-success');
     saveButton.setAttribute('title', 'SAVE TEXT or ESC TO CANCEL');
@@ -107,32 +104,4 @@ function deleteDataAndSave(dataId, data) {
     dataHandler.synchronise()
 }
 
-//----------
 
-
-
-function makeTextEditableOnClick(element, saveButtonId) {
-    element.addEventListener('click', function () {
-        element.contentEditable = 'true';
-        if (element.nextSibling === null) {
-            makeSaveButton(element, saveButtonId)
-        }
-    })
-}
-
-function makeTextReturnToDefaultOnMouseOut(element, saveButtonId) {
-    element.addEventListener('mouseout', function () {
-        if (element.isContentEditable) {
-            let button = document.getElementById(saveButtonId);
-            element.contentEditable = 'false';
-            button.remove()
-        }
-    })
-}
-
-
-function changeLabelOfCollapseButton(collapseButton) {
-    setTimeout(function () {
-        collapseButton.classList.contains('collapsed') ? collapseButton.textContent = 'SHOW' : collapseButton.textContent = 'HIDE'
-    }, 200)
-}
