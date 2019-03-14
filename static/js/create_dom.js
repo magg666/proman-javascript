@@ -132,6 +132,7 @@ function createBoard(boardsContainer, columnHeaders, columnClasses) {
   for(let i=0; i<columnHeaders.length; i++) {
     let cardDiv = document.createElement('div');
     cardDiv.setAttribute('class','for-cards col-3');
+    cardDiv.setAttribute('data-status-id', `${i}`);
     cardDiv.classList.add(columnClasses[i]);
     rowWithCardDivs.appendChild(cardDiv);
   }
