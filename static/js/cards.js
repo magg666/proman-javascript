@@ -35,6 +35,7 @@ function fillCard(card, card_data) {
 
     let cardArchiveButton = card.querySelector('card-archive-button');
 
+
     setDataAttributes(card, card_data);
     setDataAttributes(cardText, card_data);
     setDataAttributes(cardDeleteButton, card_data);

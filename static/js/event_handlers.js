@@ -32,7 +32,7 @@ function updateText(element, data) {
 		dataHandler.synchronise()
 	});
 
-	element.parentElement.parentElement.appendChild(saveButton);
+	element.closest('.card').appendChild(saveButton)
 }
 
 //------------------------
