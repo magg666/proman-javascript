@@ -1,4 +1,5 @@
 export {createBoard, addListenersToElementsTable}
+import {drop, allowDrop} from "./event_handlers.js";
 
 
 function createBoard(board) {
@@ -47,6 +48,8 @@ function createBoard(board) {
     boardTitle.textContent = board.title;
     boardsContainer.appendChild(boardTable);
 
+
+
 }
 
 function addListenersToElementsTable(board) {
@@ -63,4 +66,12 @@ function addListenersToElementsTable(board) {
             collapseButton.classList.contains('collapsed') ? collapseButton.textContent = 'SHOW' : collapseButton.textContent = 'HIDE'
         }, 200)
     });
+
+    let columns = document.querySelectorAll('.for-cards');
+
+    for (let column of columns) {
+        drop(column);
+        allowDrop(column);
+    }
+
 }
