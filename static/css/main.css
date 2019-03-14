@@ -1,6 +1,16 @@
 body{
     padding: 20px;
+    font-family: 'Maven Pro', sans-serif;
 }
+
+.proman-nav, .proman-text {
+    background-color: #c9dfff;
+    font-size: 30px;
+    color: black;
+    letter-spacing: 2px;
+}
+
+
 .container{
     margin: 20px auto 20px auto;
 }
@@ -33,4 +43,20 @@ h4{
     background-color: white;
     padding: 3px;
 }
+.row-one {
+    background-color: #e8fff0;
+    padding: 10px;
+    font-size: 26px;
+}
 
+.btn-board {
+    font-size: 24px;
+    font-weight: bolder;
+    width: 140px;
+}
+
+.row-two {
+    text-align: center;
+    font-size: 26px;
+    font-weight: bolder;
+}

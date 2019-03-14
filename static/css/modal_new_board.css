@@ -32,6 +32,18 @@
     font-size: 28px;
 }
 
+.newBoardButtonDiv{
+    height: 50px;
+    padding: 20px;
+    margin: 10px;
+
+}
+
+#newBoardBtn{
+    font-size: 26px;
+
+}
+
 .close-btn {
     color: #fff;
     float: right;
