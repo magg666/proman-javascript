@@ -36,10 +36,10 @@ function createBoard(board) {
     </div>
     
     <div class="row">
-    <div class="for-cards col-3 card-container0"></div>
-    <div class="for-cards col-3 card-container1"></div>
-    <div class="for-cards col-3 card-container2"></div>
-    <div class="for-cards col-3 card-container3"></div>
+    <div class="for-cards col-3 card-container0" data-board-id=${board.id} data-status-id="0"></div>
+    <div class="for-cards col-3 card-container1" data-board-id=${board.id} data-status-id="1"></div>
+    <div class="for-cards col-3 card-container2" data-board-id=${board.id} data-status-id="2"></div>
+    <div class="for-cards col-3 card-container3" data-board-id=${board.id} data-status-id="3"></div>
     </div>
     </div>`;
 
@@ -47,6 +47,8 @@ function createBoard(board) {
     let boardTitle = boardTable.querySelector('h3');
     boardTitle.textContent = board.title;
     boardsContainer.appendChild(boardTable);
+
+
 
 
 

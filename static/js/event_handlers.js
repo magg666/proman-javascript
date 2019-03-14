@@ -61,11 +61,20 @@ function allowDrop(element) {
 	})
 }
 
-function drop(element) {
-	element.addEventListener('drop', function (ev) {
+function drop(receivingElement) {
+	receivingElement.addEventListener('drop', function (ev) {
 		ev.preventDefault();
-		let data = ev.dataTransfer.getData('text/plain');
-		ev.target.appendChild(document.getElementById(data))
+		let cardId = ev.dataTransfer.getData('text/plain');
+
+		const card = document.getElementById(cardId);
+		receivingElement.appendChild(card);
+
+		card.removeAttribute('data-board-id');
+		card.removeAttribute('data-status-id');
+
+		card.setAttribute('data-board-id', receivingElement.dataset.boardId);
+		card.setAttribute('data-status-id', receivingElement.dataset.statusId);
+
 	})
 }
 
