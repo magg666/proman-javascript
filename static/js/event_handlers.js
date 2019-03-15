@@ -32,7 +32,7 @@ function updateText(element, data) {
 		dataHandler.synchronise()
 	});
 
-	element.parentElement.parentElement.appendChild(saveButton);
+	element.closest('.card').appendChild(saveButton)
 }
 
 //------------------------
@@ -61,22 +61,25 @@ function allowDrop(element) {
 	})
 }
 
-function drop(receivingElement) {
+function drop(receivingElement, allCards) {
 	receivingElement.addEventListener('drop', function (ev) {
 		ev.preventDefault();
-		let cardId = ev.dataTransfer.getData('text/plain');
+		let dropCardId = ev.dataTransfer.getData('text/plain');
 
-		const card = document.getElementById(cardId);
-		receivingElement.appendChild(card);
+		const dropCard = document.getElementById(dropCardId);
+		receivingElement.appendChild(dropCard);
 
-		card.removeAttribute('data-board-id');
-		card.removeAttribute('data-status-id');
+		dropCard.removeAttribute('data-board-id');
+		dropCard.removeAttribute('data-status-id');
 
-		card.setAttribute('data-board-id', receivingElement.dataset.boardId);
-		card.setAttribute('data-status-id', receivingElement.dataset.statusId);
+		dropCard.setAttribute('data-board-id', receivingElement.dataset.boardId);
+		dropCard.setAttribute('data-status-id', receivingElement.dataset.statusId);
 
-		// data.status_id = card.dataset.statusId;
-		// data.board_id = card.dataset.boardId;
+		// if (allCards.id === dropCard.dataset.cardId) {
+		// 	allCards.board_id = dropCard.dataset.boardId;
+		// 	allCards.status_id = dropCard.dataset.statusId;
+		// }
+
 
 
 	})

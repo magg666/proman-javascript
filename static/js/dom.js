@@ -23,6 +23,13 @@ let dom = {
             dom.loadCards(boardId)
         }
     },
+    loadAllCards: function () {
+        dataHandler.getAllCards(this.showAllCards);
+    },
+    showAllCards: function (cards) {
+
+        // addListenersToElementsTable(cards);
+    },
     loadCards: function (boardId) {
         // retrieves cards and makes showCards called
 

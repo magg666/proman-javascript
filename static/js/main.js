@@ -8,6 +8,7 @@ function init() {
     dataHandler.init();
     // loads the boards to the screen
     dom.loadBoards();
+    dom.loadAllCards();
     addListenerButtonModal("register-button", "registration");
     addListenerButtonModal("login-button", "login");
 }

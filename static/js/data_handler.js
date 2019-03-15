@@ -32,7 +32,13 @@ let dataHandler = {
         // the boards are retrieved and then the callback function is called with the boards
 
         let boards = this._data.boards;
+
         callback(boards);
+    },
+    getAllCards: function (callback) {
+        let cards = this._data.cards;
+
+        callback(cards);
     },
     getBoard: function (boardId, callback) {
 
