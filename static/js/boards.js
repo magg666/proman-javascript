@@ -68,6 +68,9 @@ function addListenersToElementsTable(board) {
     });
 
     let columns = document.querySelectorAll('.for-cards');
+    for(let i = 0; i<columns.length; i++){
+        columns[i].setAttribute('id', 'column'+ [i])
+    }
 
     for (let column of columns) {
         drop(column);
