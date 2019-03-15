@@ -21,6 +21,7 @@ let dom = {
             addListenersToElementsTable(board);
             let boardId = board.id;
             dom.loadCards(boardId)
+
         }
     },
     loadCards: function (boardId) {

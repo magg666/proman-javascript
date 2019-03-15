@@ -47,6 +47,7 @@ let dataHandler = {
         // the status is retrieved and then the callback function is called with the status
     },
     getCardsByBoardId: function (boardId, callback) {
+        // the cards are retrieved and then the callback function is called with the cards
         let cards = this._data.cards;
         let cardsList = [];
 
@@ -56,13 +57,19 @@ let dataHandler = {
                     cardsList.push(cards[i]);
                 }
             }
-
-
         }
-        return callback(cardsList)
-        // the cards are retrieved and then the callback function is called with the cards
+        if(callback && typeof callback === 'function'){
+            return callback(cardsList)
+        }else{
+            return cardsList
+        }
+
+
     },
     getCard: function (cardId, callback) {
+        let card = this._data.cards[cardId];
+        return callback(card)
+
         // the card is retrieved and then the callback function is called with the card
     },
     createNewBoard: function (boardTitle, callback) {
