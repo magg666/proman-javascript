@@ -19,14 +19,26 @@ self.addEventListener('install', function (evt) {
 	);
 });
 
-self.addEventListener('fetch', function (evt) {
-	// Snooze logs...
-	// console.log(event.request.url);
-	evt.respondWith(
-		// Firstly, send request..
-		fetch(evt.request).catch(function () {
-			// When request failed, return file from cache...
-			return caches.match(evt.request);
-		})
-	);
+self.addEventListener('fetch', (evt) => {
+	console.log('Event: fetch', { evt });
+
+	if (isForeignRequest(evt.request.url)) {
+		return;
+	}
+
+	evt.respondWith(handleFetch(evt));
 });
+
+async function handleFetch(evt) {
+	const request = evt.request;
+	const cache = await caches.open(CACHE_NAME);
+	const resource = await cache.match(request);
+
+	if (resource) {
+		return resource;
+	}
+
+	const response = await fetch(request.clone());
+	await cache.put(request, response.clone());
+	return response;
+}
