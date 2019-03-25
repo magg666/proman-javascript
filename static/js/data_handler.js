@@ -49,12 +49,15 @@ let dataHandler = {
     getCardsByBoardId: function (boardId, callback) {
         let cards = this._data.cards;
         let cardsList = [];
+        if(boardId)
 
         for (let i = 0; i < cards.length; i++) {
             if (cards[i] !== null) {
                 if (boardId === cards[i].board_id) {
                     cardsList.push(cards[i]);
                 }
+            }else {
+                return cards
             }
 
 
