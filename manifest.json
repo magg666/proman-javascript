@@ -1,0 +1,15 @@
+{
+  "short_name": "Proman",
+  "name": "Proman osom",
+  "icons": [
+    {
+      "src": "static/images/proman.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#fff",
+  "theme_color": "#ede43b",
+  "display": "fullscreen"
+}
