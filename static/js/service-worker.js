@@ -41,7 +41,7 @@ async function handleActivate() {
 }
 
 function isForeignRequest(url) {
-	const regexp = new RegExp(self.origin, 'i');
+	const regexp = new RegExp(self.origin, 'static/js/pwa_test.html');
 	return !regexp.test(url);
 }
 
