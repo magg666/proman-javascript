@@ -3,21 +3,46 @@ const CACHE_NAME = 'promanik';
 // List of files which are store in cache.
 let filesToCache = [
 	'/',
-	'/static/',
-	'/templates/'
+	'/templates/pwa_test.html'
 
 ];
+const console = (({ log, error }, label) => ({
+	// Enable logs
+	log: (...args) => log(`%c${label}`, 'color: purple', ...args),
+	error: (...args) => error(label, ...args)
 
-self.addEventListener('install', function (evt) {
-	evt.waitUntil(
-		caches.open(CACHE_NAME).then(function (cache) {
-			return cache.addAll(filesToCache);
-		}).catch(function (err) {
-			// Snooze errors...
-			// console.error(err);
-		})
-	);
+	// Disable logs
+	// log: () => null,
+	// error: () => null
+}))(self.console, '[Service Worker]');
+
+self.addEventListener('install', (evt) => {
+	console.log('Event: install', { evt });
+	evt.waitUntil(handleInstall());
 });
+
+async function handleInstall() {
+	const cache = await caches.open(CACHE_NAME);
+	await cache.addAll(CACHED_FILES);
+	return self.skipWaiting();
+}
+
+self.addEventListener('activate', (evt) => {
+	console.log('Event: activate', { evt });
+	evt.waitUntil(handleActivate());
+});
+
+async function handleActivate() {
+	const keys = await caches.keys();
+	return await Promise.all(keys
+		.filter((key) => key !== CACHE_NAME)
+		.map((key) => caches.delete(key)));
+}
+
+function isForeignRequest(url) {
+	const regexp = new RegExp(self.origin, 'i');
+	return !regexp.test(url);
+}
 
 self.addEventListener('fetch', (evt) => {
 	console.log('Event: fetch', { evt });

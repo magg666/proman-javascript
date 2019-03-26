@@ -3,7 +3,7 @@
   "name": "Proman osom",
   "icons": [
     {
-      "src": "static/images/proman.png",
+      "src": "/static/images/proman.png",
       "sizes": "192x192",
       "type": "image/png"
     }
