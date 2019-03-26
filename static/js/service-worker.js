@@ -3,7 +3,7 @@ const CACHE_NAME = 'promanik';
 // List of files which are store in cache.
 let filesToCache = [
 	'/',
-	'/templates/pwa_test.html'
+	'/static/pwa_test.html'
 
 ];
 const console = (({ log, error }, label) => ({
