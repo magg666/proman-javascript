@@ -8,7 +8,8 @@
       "type": "image/png"
     }
   ],
-  "start_url": "https://proman-app.herokuapp.com/static/js/pwa_test.html",
+  "Scope": "https://proman-app.herokuapp.com",
+  "start_url": "/static/js/pwa_test.html",
   "background_color": "#fff",
   "theme_color": "#ede43b",
   "display": "fullscreen"
