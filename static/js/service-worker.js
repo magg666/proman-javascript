@@ -2,7 +2,9 @@ const CACHE_NAME = 'promanik';
 
 // List of files which are store in cache.
 let filesToCache = [
-	'static/js/pwa_test.html'
+	'/',
+	'/static/js/main.js',
+	'/static/js/pwa_test.html'
 
 ];
 const console = (({ log, error }, label) => ({
