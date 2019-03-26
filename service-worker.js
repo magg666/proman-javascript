@@ -1,3 +1,6 @@
+console.log('Success');
+
+
 const CACHE_NAME = 'promanik';
 
 // List of files which are store in cache.
@@ -23,7 +26,7 @@ self.addEventListener('install', (evt) => {
 
 async function handleInstall() {
 	const cache = await caches.open(CACHE_NAME);
-	await cache.addAll(CACHED_FILES);
+	await cache.addAll(filesToCache);
 	return self.skipWaiting();
 }
 
