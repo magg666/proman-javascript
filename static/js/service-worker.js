@@ -2,7 +2,7 @@ const CACHE_NAME = 'promanik';
 
 // List of files which are store in cache.
 let filesToCache = [
-	'static/pwa_test.html'
+	'static/js/pwa_test.html'
 
 ];
 const console = (({ log, error }, label) => ({
@@ -22,7 +22,7 @@ self.addEventListener('install', (evt) => {
 
 async function handleInstall() {
 	const cache = await caches.open(CACHE_NAME);
-	await cache.addAll(filesToCache);
+	await cache.addAll('static/js/pwa_test.html');
 	return self.skipWaiting();
 }
 
