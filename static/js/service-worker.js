@@ -22,7 +22,7 @@ self.addEventListener('install', (evt) => {
 
 async function handleInstall() {
 	const cache = await caches.open(CACHE_NAME);
-	await cache.addAll('static/js/pwa_test.html');
+	await cache.addAll(filesToCache);
 	return self.skipWaiting();
 }
 
