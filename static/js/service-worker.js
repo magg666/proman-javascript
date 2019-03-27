@@ -1,84 +1,33 @@
-// if (navigator.onLine) {
-// 	alert('online');
-// } else {
-// 	alert('offline');
-// }
-
-const CACHE_NAME = 'promanik';
+const CACHE_NAME = 'wpisz-tutaj-dowolny-string';
 
 // List of files which are store in cache.
 let filesToCache = [
 	'/',
-	'/static/js/main.js',
-	'/static/js/pwa_test.html'
-
+	'/css/',
+	'/static/main.js',
+	'/static/pwa_test.html',
+	'static/images/proman.png'
 ];
-const console = (({ log, error }, label) => ({
-	// Enable logs
-	log: (...args) => log(`%c${label}`, 'color: purple', ...args),
-	error: (...args) => error(label, ...args)
 
-
-	// Disable logs
-	// log: () => null,
-	// error: () => null
-}))(self.console, '[Service Worker]');
-
-// if (navigator.onLine) {
-// 	console.log('online');
-// } else {
-// 	console.log('offline');
-// }
-
-self.addEventListener('install', (evt) => {
-	console.log('Event: install', { evt });
-	evt.waitUntil(handleInstall());
+self.addEventListener('install', function (evt) {
+	evt.waitUntil(
+		caches.open(CACHE_NAME).then(function (cache) {
+			return cache.addAll(filesToCache);
+		}).catch(function (err) {
+			// Snooze errors...
+			// console.error(err);
+		})
+	);
 });
 
-async function handleInstall() {
-	const cache = await caches.open(CACHE_NAME);
-	await cache.addAll(filesToCache);
-	return self.skipWaiting();
-}
-
-self.addEventListener('activate', (evt) => {
-	console.log('Event: activate', { evt });
-	evt.waitUntil(handleActivate());
+self.addEventListener('fetch', function (evt) {
+	// Snooze logs...
+	// console.log(event.request.url);
+	evt.respondWith(
+		// Firstly, send request..
+		fetch(evt.request).catch(function () {
+			// When request failed, return file from cache...
+			return caches.match(evt.request);
+		})
+	);
 });
-
-async function handleActivate() {
-	console.log('handleActivate1');
-	const keys = await caches.keys();
-	return await Promise.all(keys
-		.filter((key) => key !== CACHE_NAME)
-		.map((key) => caches.delete(key)));
-}
-
-function isForeignRequest(url) {
-	const regexp = new RegExp(self.origin, 'https://proman-app.herokuapp.com/');
-	return !regexp.test(url);
-}
-
-self.addEventListener('fetch', (evt) => {
-	console.log('Event: fetch', { evt });
-
-	if (isForeignRequest(evt.request.url)) {
-		return;
-	}
-
-	evt.respondWith(handleFetch(evt));
-});
-
-async function handleFetch(evt) {
-	const request = evt.request;
-	const cache = await caches.open(CACHE_NAME);
-	const resource = await cache.match(request);
-
-	if (resource) {
-		return resource;
-	}
-
-	const response = await fetch(request.clone());
-	await cache.put(request, response.clone());
-	return response;
-}
