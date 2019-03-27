@@ -51,7 +51,7 @@ async function handleActivate() {
 	const keys = await caches.keys();
 	return await Promise.all(keys
 		.filter((key) => key !== CACHE_NAME)
-		.map((key) => caches.delete(key)).console.log('handleActivate2'));
+		.map((key) => caches.delete(key)).console.log);
 }
 
 function isForeignRequest(url) {
