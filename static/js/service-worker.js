@@ -1,3 +1,9 @@
+// if (navigator.onLine) {
+// 	alert('online');
+// } else {
+// 	alert('offline');
+// }
+
 const CACHE_NAME = 'promanik';
 
 // List of files which are store in cache.
@@ -12,10 +18,17 @@ const console = (({ log, error }, label) => ({
 	log: (...args) => log(`%c${label}`, 'color: purple', ...args),
 	error: (...args) => error(label, ...args)
 
+
 	// Disable logs
 	// log: () => null,
 	// error: () => null
 }))(self.console, '[Service Worker]');
+
+// if (navigator.onLine) {
+// 	console.log('online');
+// } else {
+// 	console.log('offline');
+// }
 
 self.addEventListener('install', (evt) => {
 	console.log('Event: install', { evt });
@@ -41,7 +54,7 @@ async function handleActivate() {
 }
 
 function isForeignRequest(url) {
-	const regexp = new RegExp(self.origin, 'static/js/pwa_test.html');
+	const regexp = new RegExp(self.origin, 'https://proman-app.herokuapp.com/');
 	return !regexp.test(url);
 }
 
