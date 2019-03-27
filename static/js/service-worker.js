@@ -47,10 +47,11 @@ self.addEventListener('activate', (evt) => {
 });
 
 async function handleActivate() {
+	console.log('handleActivate1');
 	const keys = await caches.keys();
 	return await Promise.all(keys
 		.filter((key) => key !== CACHE_NAME)
-		.map((key) => caches.delete(key)));
+		.map((key) => caches.delete(key)).console.log('handleActivate2'));
 }
 
 function isForeignRequest(url) {
